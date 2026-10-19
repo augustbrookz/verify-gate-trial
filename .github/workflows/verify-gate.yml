@@ -1,0 +1,41 @@
+name: Verify Gate
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+  issue_comment:
+    types: [created]
+  schedule:
+    - cron: '17 3 * * *' # nightly full run
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+  security-events: write
+jobs:
+  verify-gate:
+    if: github.event_name != 'issue_comment' || (github.event.issue.pull_request && startsWith(github.event.comment.body, '/verify-override'))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: .xyntherium/cache
+          key: verify-gate-${{ github.run_id }}
+          restore-keys: verify-gate-
+      - uses: augustbrookz/verify-gate@v0
+        with:
+          config: verify-gate.yml
+          fail-on: block
+          # api-key: ${{ secrets.XYN_API_KEY }}        # hosted mode only
+          # signing-key: ${{ secrets.XYN_GATE_SIGNING_KEY }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verify-gate
+          path: |
+            .xyntherium/verify-gate-ledger.json
+            .xyntherium/verify-gate.sarif
+            .xyntherium/verify-gate-summary.md
+            .xyntherium/verify-gate-policy-change.json
+        # Best effort: an artifact storage quota must not fail the job.
+        continue-on-error: true

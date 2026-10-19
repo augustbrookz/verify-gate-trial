@@ -1,0 +1,73 @@
+# Verify Gate golden set — DRAFT: review before trusting.
+# Drafted by `xyntherium-verify init` from this repository's documentation. A person must
+# check every question, passage and claim, then remove `draft: true` and set
+# `policy.enforcement: enforce` to let the Gate block. Until then it only reports.
+# Each case uses a recorded answer (the passage itself). Point an endpoint at your app to check live answers.
+# Evidence support for supplied sources only; not a compliance certification.
+version: 1
+draft: true
+mode: local
+sources:
+  - id: docs-returns
+    path: docs/returns.md
+    version: draft
+    sha256: 27c22b7377c5884764ec69c99df1586bfb2de3ab6772816530cff4d8676792fe
+  - id: docs-shipping
+    path: docs/shipping.md
+    version: draft
+    sha256: a1589bceacb0e58e3a661015a7ceca37b59894c5520dfc1d6230a14a9b7752c0
+policy:
+  enforcement: report_only
+suites:
+  - name: starter
+    cases:
+      - id: docs-shipping-1
+        question: "How much does it cost (Shipping): Express shipping costs $15 and delivers within 2?"
+        answer: Express shipping costs $15 and delivers within 2 business days if the order is placed before 1 p.m.
+        sources:
+          - docs-shipping
+        material_claims:
+          - claim: Express shipping costs $15 and delivers within 2 business days if the order is placed before 1 p.m
+            materiality: critical
+            quote: Express shipping costs $15 and delivers within 2 business days if the order is placed before 1 p.m.
+            source: docs-shipping
+      - id: docs-returns-1
+        question: What is the refund policy (Returns and refunds)?
+        answer: Unworn items can be returned for a full refund within 30 days of delivery, final-sale items excluded.
+        sources:
+          - docs-returns
+        material_claims:
+          - claim: Unworn items can be returned for a full refund within 30 days of delivery, final-sale items excluded
+            materiality: critical
+            quote: Unworn items can be returned for a full refund within 30 days of delivery, final-sale items excluded.
+            source: docs-returns
+      - id: docs-returns-2
+        question: "How much does it cost (Returns and refunds): Return shipping is free for members; other customers?"
+        answer: Return shipping is free for members; other customers pay a $7 return shipping fee.
+        sources:
+          - docs-returns
+        material_claims:
+          - claim: Return shipping is free for members; other customers pay a $7 return shipping fee
+            materiality: critical
+            quote: Return shipping is free for members; other customers pay a $7 return shipping fee.
+            source: docs-returns
+      - id: docs-shipping-2
+        question: "How much does it cost (Shipping): Standard shipping is free on orders over $50?"
+        answer: Standard shipping is free on orders over $50 within the contiguous United States.
+        sources:
+          - docs-shipping
+        material_claims:
+          - claim: Standard shipping is free on orders over $50 within the contiguous United States
+            materiality: critical
+            quote: Standard shipping is free on orders over $50 within the contiguous United States.
+            source: docs-shipping
+      - id: docs-returns-3
+        question: What is the refund policy (Returns and refunds)?
+        answer: Refunds are issued to the original payment method within 5 business days of receiving the return.
+        sources:
+          - docs-returns
+        material_claims:
+          - claim: Refunds are issued to the original payment method within 5 business days of receiving the return
+            materiality: critical
+            quote: Refunds are issued to the original payment method within 5 business days of receiving the return.
+            source: docs-returns
