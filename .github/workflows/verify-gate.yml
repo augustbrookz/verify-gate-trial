@@ -26,6 +26,7 @@ jobs:
         with:
           config: verify-gate.yml
           fail-on: block
+          full-run: 'true'
           # api-key: ${{ secrets.XYN_API_KEY }}        # hosted mode only
           # signing-key: ${{ secrets.XYN_GATE_SIGNING_KEY }}
       - uses: actions/upload-artifact@v4
