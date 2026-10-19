@@ -22,7 +22,7 @@ jobs:
           path: .xyntherium/cache
           key: verify-gate-${{ github.run_id }}
           restore-keys: verify-gate-
-      - uses: augustbrookz/verify-gate@v0
+      - uses: augustbrookz/verify-gate-action@v0
         with:
           config: verify-gate.yml
           fail-on: block
