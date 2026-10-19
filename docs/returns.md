@@ -1,6 +1,6 @@
 # Returns and refunds
 
-Unworn items can be returned for a full refund within 30 days of delivery, final-sale items excluded.
+Unworn items can be returned for a full refund within 14 days of delivery, final-sale items excluded.
 
 Refunds are issued to the original payment method within 5 business days of receiving the return.
 

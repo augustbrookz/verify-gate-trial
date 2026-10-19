@@ -11,7 +11,7 @@ sources:
   - id: docs-returns
     path: docs/returns.md
     version: draft
-    sha256: 27c22b7377c5884764ec69c99df1586bfb2de3ab6772816530cff4d8676792fe
+    sha256: 80656da4dcffe7c30b7d5c91a06f4372f8478d3492e01af34d75e1e2cace26c2
   - id: docs-shipping
     path: docs/shipping.md
     version: draft
